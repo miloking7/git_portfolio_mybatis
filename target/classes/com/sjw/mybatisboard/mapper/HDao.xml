@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sjw.mybatisboard.dao.HDao"> 
+   
+	<insert id="bookWrite">
+		insert into HOMEBOOK
+		(SERIALNO,DAY,SECTION,accounttitle,remark,revenue,expense,mid)
+		values (HOMEBOOK_SEQ.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+	</insert>
+
+
+	<select id="bookAllList" resultType="com.sjw.mybatisboard.dto.HomeBook">
+		select * from HOMEBOOK
+	</select>
+
+	
+	
+	<select id="bookList" parameterType="string"
+		resultType="com.sjw.mybatisboard.dto.HomeBook">
+		select
+		SERIALNO,DAY,SECTION,accounttitle,remark,revenue,expense,mid
+		from
+		HOMEBOOK where MID = #{param1}
+	</select>
+
+	<select id="bookView" parameterType="long"
+		resultType="com.sjw.mybatisboard.dto.HomeBook">
+		select
+		SERIALNO,DAY,SECTION,accounttitle,remark,revenue,expense,mid
+		from
+		HOMEBOOK where SERIALNO = #{param1}
+	</select>
+	
+
+	<update id="modify">
+		UPDATE HOMEBOOK SET DAY = #{param1},
+						SECTION = #{param2},
+					ACCOUNTTITLE = #{param3},
+						REMARK= #{param4},
+					REVENUE = #{param5},
+					EXPENSE = #{param6}
+				WHERE SERIALNO = #{param7}
+	</update>
+
+	<delete id="removeBook" parameterType="long">
+		delete from
+		HOMEBOOK where SERIALNO = #{param1}
+	</delete>
+
+</mapper>	
+	
